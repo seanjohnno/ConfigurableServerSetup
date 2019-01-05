@@ -17,3 +17,30 @@ I'd welcome feedback and improvements on this but the scripts do the following (
 * Enables firewall and only allows ports for OpenSSH (22 in), SMTP (25 out), Docker (443 out), NGINX (80, 443 in)
 
 ### Getting started
+
+#### 1. Setup
+* Create a new key/pair but name it, don't use the default. You can find how to [here](https://help.github.com/enterprise/2.15/user/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
+* Add your new key to your git account, if possible just give it read access to the repository(s) you'll be running on your web server
+* In your git repository(s) make sure the Dockerfile is at the root
+* Clone this repository
+
+#### 2. Configuration
+* Drop your newly created private key in the *sshKeys/* directory
+* For each domain you'll be using, create a new *yourdomain.sh* file in *configHosts/*. Remove/edit *exampleDomain.sh*:
+  * *NAME* can be anything you like
+  * *PORT* should be the port your container is using to serve web traffic (usually matching an EXPOSE statement in your Dockerfile)
+  * *GIT_REPOSITORY* what you'd use to clone it
+  * *DOMAINS* the domain name you're using and it's variations i.e. "www.mydomain.co.uk mydomain.co.uk"
+
+#### 3. Server Creation (unsure about how to create/setup a server?)
+* TODO
+
+#### 4. Run
+* Copy your modified version of this repository to the server: ```scp -r ./ root@<ip_address>:/tmp/setup```
+* SSH into your server: ```ssh root@<ip_address>```
+* Run the setup script: ```cd /tmp/setup; ./setup.sh```
+* This will log you out of the session as the server reboots but after it's (auto) rebooted, you should be able to access your website with https://yourdomain
+
+#### 5. Update *(You've been working hard, now you want your changes on the server)*
+* SSH into your server: ```ssh root@<ip_address>```
+* Run the update script: ```cd /tmp/setup; ./update.sh```
