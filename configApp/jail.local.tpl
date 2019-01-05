@@ -1,0 +1,3 @@
+destemail = $FAIL2BAN_SENDTO_EMAIL
+sendername = $FAIL2BAN_SENDER_NAME
+sender = $FAIL2BAN_SENDER_EMAIL
